@@ -7,23 +7,22 @@
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
   <body>
-    <h1>Laboratorio Blancarte</h1>
-    <h3>Reg S.S.A. 6459 LIC. SANITARIA No. AFM-00023-2002</h3>
-    <h3>REG. D.G.P. 299190 REG. EDO. 402</h3>
+
+    <%- include("header") -%>
 
     <form action="/" method="post">
       <div class="top">
         <label for="nombrePaciente">Nombre del Paciente</label>
         <input type="text" id="nombrePaciente" name="nombrePaciente" /> <br />
         <br />
-        <label for="nombreDoctor">Nombre del Paciente</label>
+        <label for="nombreDoctor">Nombre del Doctor</label>
         <input type="text" name="nombreDoctor" /> <br />
+        <label for="nombreDoctor">Folio</label>
+        <input type="text" name="folio" /> <br />
         <br />
-        <label for="registro">Registro</label>
-        <input type="text" id="registro" name="registro" /> <br />
-        <br />
-        <button type="submit" name="envio">Registrar</button>
-      </div>
+        <button type="submit">Submit</button>
+       </div>
     </form>
+        <%- include("footer") -%>
   </body>
 </html>

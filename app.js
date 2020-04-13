@@ -1,3 +1,4 @@
+//jshint esversion:6
 // Const variables
 
 const trigl = 801.2;
@@ -13,13 +14,10 @@ const ure = 25.7
 const uri = 3.25
 const z = 11.42
 
-
 //  NodeJs Libs
 const express = require("express");
-const express = require("express");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-var mongoose = require('mongoose');
-
 
 // Start up
 
@@ -27,11 +25,43 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-mongoose.connect('mongodb://localhost:27017/QuimicaDB', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/QuimicaDB', {useNewUrlParser: true, useUnifiedTopology: true });
+
+//  Database Schemas
+
+const pacientesSchema = {
+  Nombre: String,
+  NombreDoctor: String,
+  Folio: String,
+  FechaNacimiento: Number,
+  TomaDeMuestra: Number,
+  FechaReporte: Number,
+  Fecha: Number,
+};
+
+  const Pacientes = mongoose.model("Pacientes", pacientesSchema);
+
+app.get("/", function (req, res) {
+  console.log("entered app");
+  res.redirect("/index.html");
+});
 
 
+app.post("/", function (req, res){
 
+  const NombrePaciente = req.body.nombrePaciente;
+  const NombreDoctor = req.body.nombreDoctor;
+  const Folio = req.body.folio;
 
+  const PacientesL = new Pacientes({
+    Nombre: NombrePaciente,
+    NombreDoctor: NombreDoctor,
+    Folio: Folio,
+  });
+
+  //save to database
+    PacientesL.save();
+});
 
 
 
