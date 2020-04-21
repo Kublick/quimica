@@ -14,6 +14,7 @@ const ure = 25.7
 const uri = 3.25
 const z = 11.42
 
+
 //  NodeJs Libs
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -28,11 +29,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 mongoose.connect('mongodb://localhost:27017/QuimicaDB', {useNewUrlParser: true, useUnifiedTopology: true });
 
+
+
 //  Database Schemas
 
 const pacientesSchema = {
   Nombre: String,
   ApeidoPaciente: String,
+  Genero: String,
   NombreDoctor: String,
   Folio: String,
   FechaNacimiento: Number,
@@ -48,11 +52,10 @@ app.get("/", function (req, res) {
 });
 
 
-// app.post("/", function (req, res) {
-//   res.send("sent info to root");
-//   console.log("entered root");
-
-// });
+// ?? Cuando se necesite saber si es buky para las cuentas
+// const temp = moment(req.body.fechaNacimiento);
+// const now = moment();
+// var adulto = now.diff(temp, 'years');
 
 app.get ("/registro", function (req, res) {
   res.sendFile(__dirname + "/public/Registro.html");
@@ -63,30 +66,25 @@ app.post("/", function (req, res) {
 
   const NombrePaciente = req.body.nombrePaciente;
   const pacienteApeido = req.body.pacienteApeido;
+  const genero = req.body.genero;
   const doctor = req.body.doctor;
   const folio = req.body.folio;
   const fechaNacimiento = moment(req.body.fechaNacimiento, 'YYYY-MM-DD', 'us', true);
 
-
-  console.log("nombre del paciente: " + NombrePaciente);
-  console.log("apeido del paciente: " + pacienteApeido);
-  console.log("Doctor " + doctor);
-  console.log("folio" + folio);
-  console.log("nacimiento " + fechaNacimiento);
-
-  // const PacientesL = new Pacientes({
-  //   Nombre: NombrePaciente,
-  //   ApeidoPaciente: pacienteApeido,
-  //   NombreDoctor: doctor,
-  //   Folio: folio,
-  //   FechaNacimiento: fechaNacimiento
-  // });
+  const PacientesL = new Pacientes({
+    Nombre: NombrePaciente,
+    ApeidoPaciente: pacienteApeido,
+    Genero: genero,
+    NombreDoctor: doctor,
+    Folio: folio,
+    FechaNacimiento: fechaNacimiento
+  });
 
   // //save to database
-  //   PacientesL.save();
+  PacientesL.save();
     res.send("data submitted");
 });
 
-app.listen(3000, function () {
+app.listen(3001, function () {
     console.log("Server started on port 3000");
   });
