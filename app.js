@@ -24,9 +24,8 @@ const moment = require("moment");
 // Start up
 
 const app = express();
-app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static(__dirname + '/public'));
 mongoose.connect('mongodb://localhost:27017/QuimicaDB', {useNewUrlParser: true, useUnifiedTopology: true });
 
 
@@ -37,13 +36,13 @@ const pacientesSchema = {
   Nombre: String,
   ApeidoPaciente: String,
   Genero: String,
-  NombreDoctor: String,
   Folio: String,
-  FechaNacimiento: Number,
-  TomaDeMuestra: Number,
-  FechaReporte: Number,
-  Fecha: Date
-};
+  FechaNacimiento: String,
+  Telefono: String,
+  Telefono2: String,
+  email: String,
+  email2: String
+ };
 
   const Pacientes = mongoose.model("Pacientes", pacientesSchema);
 
@@ -51,8 +50,12 @@ app.get("/", function (req, res) {
   res.send("On the root");
 });
 
+app.get("/Citologia", function (req, res) {
+  res.sendFile(__dirname + "/public/citologia.html");
+});
 
-// ?? Cuando se necesite saber si es buky para las cuentas
+
+// TODO Cuando se necesite saber si es buky para las cuentas
 // const temp = moment(req.body.fechaNacimiento);
 // const now = moment();
 // var adulto = now.diff(temp, 'years');
@@ -67,18 +70,33 @@ app.post("/", function (req, res) {
   const NombrePaciente = req.body.nombrePaciente;
   const pacienteApeido = req.body.pacienteApeido;
   const genero = req.body.genero;
-  const doctor = req.body.doctor;
-  const folio = req.body.folio;
-  const fechaNacimiento = moment(req.body.fechaNacimiento, 'YYYY-MM-DD', 'us', true);
+  const fechaNacimiento = req.body.fechaNacimiento;
+  // const fechaNacimiento = moment(req.body.fechaNacimiento, 'YYYY-MM-DD', 'us', true);
+  const phone = req.body.phone;
+  const phone2 = req.body.phone2;
+  const email = req.body.email;
+  const email2 = req.body.email2;
+
 
   const PacientesL = new Pacientes({
     Nombre: NombrePaciente,
     ApeidoPaciente: pacienteApeido,
     Genero: genero,
-    NombreDoctor: doctor,
-    Folio: folio,
-    FechaNacimiento: fechaNacimiento
+    FechaNacimiento: fechaNacimiento,
+    Telefono: phone,
+    Telefono2: phone2,
+    email: email,
+    email2: email2
   });
+
+  console.log("Paciente = " + NombrePaciente);
+  console.log("apeidos = " + pacienteApeido);
+  console.log("genero =  " + genero);
+  console.log("Fecha nac = " + fechaNacimiento);
+  console.log("Telefono = " + phone);
+  console.log("telefono2 = " + phone2);
+  console.log("email = " + email);
+  console.log("email2 = " + email2);
 
   // //save to database
   PacientesL.save();
