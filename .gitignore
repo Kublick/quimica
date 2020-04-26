@@ -12,6 +12,7 @@
 /build
 /idea
 /.idea
+/output
 
 # misc
 .DS_Store

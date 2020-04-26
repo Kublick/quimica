@@ -29,7 +29,6 @@ console.log("---------");
           const segments = parser.parseMessageIntoSegments(message);
       // Human readable JSON
           let stringed = JSON.stringify(segments, null, 2);
-          // !! const mshFields = parser2.findSegmentByName(segments, 'MSH');
           fs.writeFile(pathJSON, stringed, (err) => {
           if (err) throw err;
           console.log('Data written to file');
