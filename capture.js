@@ -2,11 +2,17 @@ const mllp = require("./node_modules/mllp-node/index");
 const fs = require('fs');
 const parser = require("parsehl7");
 
-// Setup time
-const moment = require("moment");
-var date = moment().format("YYYYMMDDhhmmss");
+// const ip = require('ip');
+// const os = require('os');
+// const userOS = os.release();
+// console.log(userOS);
 
-var server = new mllp.MLLPServer('10.10.1.7', 495);
+// Setup server
+const moment = require("moment");
+const date = moment().format("YYYYMMDDhhmmss");
+
+
+const server = new mllp.MLLPServer("10.10.1.7", 495);
 
 // Subscribe to inbound messages
 server.on('hl7', function (data){
