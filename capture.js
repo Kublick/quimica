@@ -2,11 +2,17 @@ const mllp = require("./node_modules/mllp-node/index");
 const fs = require('fs');
 const parser = require("parsehl7");
 
-// Setup time
-const moment = require("moment");
-var date = moment().format("YYYYMMDDhhmmss");
+// const ip = require('ip');
+// const os = require('os');
+// const userOS = os.release();
+// console.log(userOS);
 
-var server = new mllp.MLLPServer('10.10.1.7', 495);
+// Setup server
+const moment = require("moment");
+const date = moment().format("YYYYMMDDhhmmss");
+
+
+const server = new mllp.MLLPServer("127.0.0.1", 495);
 
 // Subscribe to inbound messages
 server.on('hl7', function (data){
@@ -16,12 +22,15 @@ console.log("----------")
 console.log("ID" + date);
 console.log("---------");
 
- const path = __dirname + "/output/" + "ID" + date + ".txt";
- const pathJSON = __dirname + "/output/" + "ID" + date + ".json";
-
+ 
  // No escribir nada si viene vacio al inicio...
   if (data === 0) {}
       else {
+        let randomNumber = Math.floor(Math.random() * 1000);
+        console.log(randomNumber);
+        let path = __dirname + "/output/" + "ID" + date + "_" + randomNumber + ".txt";
+        let pathJSON = __dirname + "/output/" + "ID" + date + "_" + randomNumber + ".json";
+
      // write plain data file
         fs.writeFile(path, data, function (err) {
      // convert to JSON
