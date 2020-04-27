@@ -2,17 +2,17 @@ const mllp = require("./node_modules/mllp-node/index");
 const fs = require('fs');
 const parser = require("parsehl7");
 
-// const ip = require('ip');
-// const os = require('os');
-// const userOS = os.release();
-// console.log(userOS);
+const ip = require('ip');
+const localIp =  ip.address();
+
 
 // Setup server
 const moment = require("moment");
 const date = moment().format("YYYYMMDDhhmmss");
 
 
-const server = new mllp.MLLPServer("127.0.0.1", 495);
+const server = new mllp.MLLPServer(localIp, 495);
+console.log("server listening at: " + localIp);
 
 // Subscribe to inbound messages
 server.on('hl7', function (data){
@@ -22,7 +22,7 @@ console.log("----------")
 console.log("ID" + date);
 console.log("---------");
 
- 
+
  // No escribir nada si viene vacio al inicio...
   if (data === 0) {}
       else {
