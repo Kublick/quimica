@@ -4,13 +4,17 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "@redoxengine/redox-hl7-v2": "^1.0.1",
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "mllp-node": "^2.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.9.6",
-    "parsehl7": "^1.0.1"
+    "mongoose-sequence": "^5.2.2",
+    "parsehl7": "^1.0.1",
+    "validator": "^13.0.0"
   },
   "devDependencies": {},
   "scripts": {

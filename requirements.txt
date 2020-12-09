@@ -35,3 +35,8 @@ Requirements
 -	Debe ser capaz de guardar resultados, clientes, doctores, staff en la base de datos
 -	Debe tener un modo de reporte de análisis clínicos en formato PDF
 -	Debe ser capaz de enviar los resultados a los pacientes y doctor
+
+var test = [ pacienteId, sesionID, GLU, 105, "ml/gr", date ]
+ 
+
+{pacienteId: pacienteid { folio : sessionid } 
