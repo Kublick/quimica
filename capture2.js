@@ -2,10 +2,12 @@ const mllp = require('./node_modules/mllp-node/index');
 const fs = require('fs');
 const parser = require('parsehl7');
 const axios = require('axios');
+const ip = require('ip');
+console.log(ip.address());
 
 // Setup server
 let data = '';
-const server = new mllp.MLLPServer('167.86.104.3/', 5000);
+const server = new mllp.MLLPServer(ip.address(), 5000);
 //const server = new mllp.MLLPServer(localIp, 495);
 // console.log('server listening at: ' + localIp);
 
