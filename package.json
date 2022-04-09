@@ -11,7 +11,7 @@
     "express": "^4.17.1",
     "ip": "^1.1.5",
     "mllp-node": "^2.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.9.6",
     "mongoose-sequence": "^5.2.2",
     "parsehl7": "^1.0.1",
